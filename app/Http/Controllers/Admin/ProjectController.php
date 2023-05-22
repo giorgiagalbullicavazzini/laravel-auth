@@ -47,7 +47,7 @@ class ProjectController extends Controller
         $newProject->slug = Str::slug($data['title']);
         $newProject->save();
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message', 'Progetto creato con successo');
     }
 
     /**
@@ -87,7 +87,7 @@ class ProjectController extends Controller
 
         $project->update($data);
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message', 'Progetto aggiornato con successo');
     }
 
     /**
@@ -100,6 +100,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('message', 'Progetto cancellato con successo');
     }
 }

@@ -8,7 +8,9 @@
             </h2>
             <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">Crea Progetto</a>
         </div>
-        {{-- @include('partials.message') --}}
+
+        @include('partials.message')
+        
         <table class="table">
             <thead>
                 <tr>
