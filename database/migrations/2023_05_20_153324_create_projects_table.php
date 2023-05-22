@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 50)->unique();
             $table->text('description');
-            $table->string('url')->unique()->nullable();
+            $table->string('slug');
             $table->string('status', 20)->nullable();
             $table->set('tags', ['web app', 'front-end', 'back-end'])->nullable();
             $table->date('release_date')->nullable();
