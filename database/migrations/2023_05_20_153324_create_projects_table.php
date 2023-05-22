@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('title', 50)->unique();
             $table->text('description');
-            $table->string('url')->unique();
-            $table->string('status', 20);
-            $table->set('tags', ['web app', 'front-end', 'back-end']);
+            $table->string('url')->unique()->nullable();
+            $table->string('status', 20)->nullable();
+            $table->set('tags', ['web app', 'front-end', 'back-end'])->nullable();
             $table->date('release_date')->nullable();
-            $table->set('languages', ['html', 'css', 'bootstrap', 'scss', 'javascript', 'vuejs', 'php', 'laravel']);
+            $table->set('languages', ['html', 'css', 'bootstrap', 'scss', 'javascript', 'vuejs', 'php', 'laravel'])->nullable();
             $table->timestamps();
         });
     }
