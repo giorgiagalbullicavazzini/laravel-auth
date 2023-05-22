@@ -4,7 +4,7 @@
     <div class="container">
         <h2 class="fs-4 text-secondary my-4">Modifica progetto: {{ $project->title }}</h2>
 
-        {{-- @include('partials.errors') --}}
+        @include('partials.errors')
 
         <form action="{{ route('admin.projects.update', $project) }}" method="POST">
             @csrf

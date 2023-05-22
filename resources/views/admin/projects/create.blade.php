@@ -4,7 +4,7 @@
     <div class="container">
         <h2 class="fs-4 text-secondary my-4">Crea un progetto</h2>
 
-        {{-- @include('partials.errors') --}}
+        @include('partials.errors')
 
         <form action="{{ route('admin.projects.store') }}" method="POST">
             @csrf

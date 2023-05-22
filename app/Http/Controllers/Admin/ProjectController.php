@@ -40,7 +40,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         $newProject = new Project();
         $newProject->fill($data);
@@ -81,7 +81,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        $data = $request->all();
+        $data = $request->validated();
 
         $project->slug = Str::slug($data['title']);
 
