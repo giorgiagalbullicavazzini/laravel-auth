@@ -1,36 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-
-    <!-- Usando Vite -->
-    @vite(['resources/js/app.js'])
-</head>
-
-<body>
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+@section('content')
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="fs-4 text-secondary my-4">
+            Lista dei progetti
+        </h2>
+        <a href="{{ route('admin.projects.create') }}" class="btn btn-primary">Crea Progetto</a>
+    </div>
+    {{-- @include('partials.message') --}}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Description</th>
+                <th scope="col">Status</th>
+                <th scope="col">Tags</th>
+                <th scope="col">Release Date</th>
+                <th scope="col">Languages</th>
+            </tr>
+        </thead>
+        <tbody>
             @foreach ($projects as $project)
-            <div class="col">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ $project->title }}</h5>
-                      <h6 class="card-subtitle mb-2 text-body-secondary">{{ $project->status }} || {{ $project->release_date }}</h6>
-                      <p class="card-text">{{ $project->description }}</p>
-                      <a href="{{ $project->url }}" class="card-link">click</a>
-                    </div>
-                    <div class="card-footer text-body-secondary">
-                        {{ $project->tags }} || {{ $project->languages }}
+            <tr>
+                <th scope="row">{{ $project->id }}</th>
+                <td>{{ $project->title }}</td>
+                <td>{{ $project->description }}</td>
+                <td>{{ $project->status }}</td>
+                <td>{{ $project->tags }}</td>
+                <td>{{ $project->release_date }}</td>
+                <td>{{ $project->languages }}</td>
+                <td>
+                    <ul class="list-unstyled d-flex m-0 gap-1 justify-content-end">
+                        <li>
+                            <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-sm btn-primary">Show</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-sm btn-warning">Edit</a>
+                        </li>
+                        <li>
+                            <a href="#" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#project-{{ $project->id }}">Delete</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+
+            {{-- <div class="modal fade" id="project-{{ $project->id }}" tabindex="-1"  aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Attenzione</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Sei sicuro di voler cancellare il progetto con id <strong>{{ $project->id }}</strong>?
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ route('admin.project.destroy', $project) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             @endforeach
-        </div>
-    </div>
-</body>
-
-</html>
+        </tbody>
+    </table>
+</div>
+@endsection
