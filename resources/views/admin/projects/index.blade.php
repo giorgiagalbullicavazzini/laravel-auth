@@ -46,7 +46,7 @@
                     </td>
                 </tr>
 
-                {{-- <div class="modal fade" id="project-{{ $project->id }}" tabindex="-1"  aria-hidden="true">
+                <div class="modal fade" id="project-{{ $project->id }}" tabindex="-1"  aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -57,7 +57,7 @@
                                 Sei sicuro di voler cancellare il progetto con id <strong>{{ $project->id }}</strong>?
                             </div>
                             <div class="modal-footer">
-                                <form action="{{ route('admin.project.destroy', $project) }}" method="POST">
+                                <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
                 @endforeach
             </tbody>
         </table>
