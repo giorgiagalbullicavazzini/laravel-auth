@@ -42,11 +42,10 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $newProject = new Project();
-        $newProject->title = $data['title'];
-        $newProject->description = $data['description'];
+        $newProject->fill($data);
         $newProject->save();
 
-        return redirect()->route('admin.projects.show', $newProject->id);
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -84,7 +83,7 @@ class ProjectController extends Controller
 
         $project->update($data);
 
-        return redirect()->route('admin.projects.show', $project->id);
+        return redirect()->route('admin.projects.index');
     }
 
     /**
