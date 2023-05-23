@@ -6,7 +6,7 @@
 
         @include('partials.errors')
 
-        <form action="{{ route('admin.projects.update', $project) }}" method="POST" enctype="multipart/form-data" class="form-input-image">
+        <form action="{{ route('admin.projects.update', $project) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -16,18 +16,6 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" name="description">{{ $project->description }}</textarea>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="set_image" name="set_image" value="1" @if($project->image) checked @endif>
-                <label class="form-check-label" for="set_image">Attiva per gestire immagine</label>
-            </div>
-            <div class="mb-3 @if(!$project->image) d-none @endif"  id="image-input-container">
-                <div class="preview">
-                    <img id="file-image-preview" @if($project->image) src="{{ asset('storage/' . $project->image) }}" @endif>
-                </div>
-    
-                <label for="image" class="form-label">Image</label>
-                <input class="form-control" type="file" id="image" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Edit</button>
         </form>

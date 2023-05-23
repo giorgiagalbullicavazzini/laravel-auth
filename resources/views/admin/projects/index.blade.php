@@ -27,7 +27,7 @@
                 @foreach ($projects as $project)
                 <tr>
                     <th scope="row">{{ $project->id }}</th>
-                    <td>@if($project->image) <a href="#" class="btn btn-sm btn-secondary">image</a> @endif {{ $project->title }}</td>
+                    <td>{{ $project->title }}</td>
                     <td>{{ $project->description }}</td>
                     <td>{{ $project->status }}</td>
                     <td>{{ $project->tags }}</td>
