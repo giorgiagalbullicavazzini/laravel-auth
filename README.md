@@ -9,4 +9,4 @@
 - [x] The user has the option of uploading an image or not doing so
 - [x] Remove a picture before replacing it
 - [x] The project image is also destroyed when a project is deleted
-- [x] Don't print an image if a project that doesn't have one
+- [x] Don't print an image if a project doesn't have one
