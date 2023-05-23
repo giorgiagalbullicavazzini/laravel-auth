@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -45,6 +46,11 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->fill($data);
         $newProject->slug = Str::slug($data['title']);
+
+        if(isset($data['image'])) {
+            $newProject->image = Storage::put('uploads', $data['image']);
+        }
+
         $newProject->save();
 
         return redirect()->route('admin.projects.index')->with('message', 'Progetto creato con successo');
@@ -85,6 +91,21 @@ class ProjectController extends Controller
 
         $project->slug = Str::slug($data['title']);
 
+        if (empty($data['set_image'])) {
+            if ($project->image) {
+                Storage::delete($project->image);
+                $project->image = null;
+            }
+        } else {
+            if (isset($data['image'])) {
+                if ($project->image) {
+                    Storage::delete($project->image);
+                }
+
+                $project->image = Storage::put('uploads', $data['image']);
+            }
+        }
+
         $project->update($data);
 
         return redirect()->route('admin.projects.index')->with('message', 'Progetto aggiornato con successo');
@@ -98,6 +119,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
+
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('message', 'Progetto cancellato con successo');
